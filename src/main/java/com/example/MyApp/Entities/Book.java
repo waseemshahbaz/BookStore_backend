@@ -39,6 +39,22 @@ public class Book {
         this.coverImage = coverImage;
     }
 
+    public void updateData(Book object) {
+        this.setAuthor(object.getAuthor());
+        this.setGenre(object.getGenre());
+        this.setIsbn(object.getIsbn());
+        this.setLanguage(object.getLanguage());
+        this.setCoverImage(object.getCoverImage());
+        this.setNumberOfPages(object.getNumberOfPages());
+        this.setPrice(object.getPrice());
+        this.setPublicationYear(object.getPublicationYear());
+        this.setPublisher(object.getPublisher());
+        this.setRatings(object.getRatings());
+        this.setSummary(object.getSummary());
+        this.setTags(object.getTags());
+        this.setTitle(object.getTitle());
+    }
+
     public Book() {
     }
 
