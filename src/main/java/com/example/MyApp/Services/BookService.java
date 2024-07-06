@@ -2,14 +2,18 @@ package com.example.MyApp.Services;
 import com.example.MyApp.Entities.Book;
 import com.example.MyApp.Repositories.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class BookService {
     private final BookRepository bookRepository;
+    @Autowired
+    AmazonS3 amazonS3;
 
     @Autowired
     public BookService(BookRepository bookRepository) {
@@ -34,6 +38,19 @@ public class BookService {
 
     public Book save(Book book) {
         return bookRepository.save(book);
+    }
+
+    public List<byte[]> getAllCoverImages() {
+        List<Book> coverImages =  bookRepository.listAllBooksByCoverImage();
+        List<byte[]> files = new ArrayList<>();
+        for(Book cover : coverImages) {
+            String coverImage = cover.getcoverImageURL();
+            if (amazonS3.objectExists(coverImage)) {
+                byte[] file = amazonS3.downloadObject(coverImage);
+                files.add(file);
+            }
+        }
+        return files;
     }
 
 }
