@@ -10,7 +10,7 @@ public class Book {
     private String id;
     private String title;
     private String author;
-    private String genre;
+    private List<String> genre;
     private int publicationYear;
     private String isbn;
     private double price;
@@ -20,9 +20,9 @@ public class Book {
     private List<Double> ratings;
     private String summary;
     private List<String> tags;
-    private String coverImage;
+    private String coverImageURL;
 
-    public Book(String id, String title, String author, String genre, int publicationYear, String isbn, double price, String language, String publisher, int numberOfPages, List<Double> ratings, String summary, List<String> tags, String coverImage) {
+    public Book(String id, String title, String author, List<String> genre, int publicationYear, String isbn, double price, String language, String publisher, int numberOfPages, List<Double> ratings, String summary, List<String> tags, String coverImageURL) {
         this.id = id;
         this.title = title;
         this.author = author;
@@ -36,7 +36,7 @@ public class Book {
         this.ratings = ratings;
         this.summary = summary;
         this.tags = tags;
-        this.coverImage = coverImage;
+        this.coverImageURL = coverImageURL;
     }
 
     public void updateData(Book object) {
@@ -44,7 +44,7 @@ public class Book {
         this.setGenre(object.getGenre());
         this.setIsbn(object.getIsbn());
         this.setLanguage(object.getLanguage());
-        this.setCoverImage(object.getCoverImage());
+        this.setcoverImageURL(object.getcoverImageURL());
         this.setNumberOfPages(object.getNumberOfPages());
         this.setPrice(object.getPrice());
         this.setPublicationYear(object.getPublicationYear());
@@ -86,11 +86,11 @@ public class Book {
         this.author = author;
     }
 
-    public String getGenre() {
+    public List<String> getGenre() {
         return genre;
     }
 
-    public void setGenre(String genre) {
+    public void setGenre(List<String> genre) {
         this.genre = genre;
     }
 
@@ -166,11 +166,11 @@ public class Book {
         this.tags = tags;
     }
 
-    public String getCoverImage() {
-        return coverImage;
+    public String getcoverImageURL() {
+        return coverImageURL;
     }
 
-    public void setCoverImage(String coverImage) {
-        this.coverImage = coverImage;
+    public void setcoverImageURL(String coverImageURL) {
+        this.coverImageURL = coverImageURL;
     }
 }

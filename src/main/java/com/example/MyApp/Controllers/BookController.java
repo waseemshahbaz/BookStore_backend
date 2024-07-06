@@ -1,6 +1,9 @@
 package com.example.MyApp.Controllers;
 
+import com.amazonaws.services.s3.AmazonS3Client;
+import com.example.MyApp.AWSConfiguration;
 import com.example.MyApp.Entities.Book;
+import com.example.MyApp.Services.AmazonS3;
 import com.example.MyApp.Services.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,12 +26,25 @@ public class BookController {
         return bookService.listAllBooks();
     }
 
-    @PostMapping("/create")
-    public Book createBook(@RequestBody Book book) {
-        return bookService.createBook(book);
+    @GetMapping("/bookCovers")
+    public List<byte[]> listAllBookCovers() {
+        List<byte[]> listofBookCovers = bookService.getAllCoverImages();
+        return listofBookCovers;
     }
 
-    @DeleteMapping("/delete/{id}")
+    @GetMapping("/{id}")
+    public Book getBook(@PathVariable String id) {
+        Optional<Book> book = bookService.findById(id);
+        return book.get();
+    }
+
+    @PostMapping("/create")
+    public Book createBook(@RequestBody Book book) {
+        Book returnObj = bookService.createBook(book);
+        return returnObj;
+    }
+
+    @DeleteMapping("/{id}")
     public void deleteBook(@PathVariable String id) {
         bookService.deleteBook(id);
     }
@@ -44,7 +60,8 @@ public class BookController {
         if(toBeUpdated.isPresent()) {
            Book bookData = toBeUpdated.get();
            bookData.updateData(book);
-           return bookService.save(bookData);
+           Book returnObj = bookService.save(bookData);
+           return returnObj;
         }
         else {
             return null;
