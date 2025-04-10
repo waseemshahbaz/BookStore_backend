@@ -2,6 +2,8 @@ package com.example.MyApp.Services;
 import com.example.MyApp.Entities.Book;
 import com.example.MyApp.Repositories.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +15,7 @@ import java.util.Optional;
 public class BookService {
     private final BookRepository bookRepository;
     @Autowired
-    AmazonS3 amazonS3;
+    private AmazonS3 amazonS3;
 
     @Autowired
     public BookService(BookRepository bookRepository) {
@@ -51,6 +53,17 @@ public class BookService {
             }
         }
         return files;
+    }
+
+    public Page<Book> listAllPaginatedBooks(Pageable pageable) {
+        return bookRepository.findAll(pageable);
+    }
+    public Page<Book> searchBooks(String title, String genre, Pageable pageable) {
+        // If title or genre is null or empty, set them to empty strings to match all records
+        if (title == null) title = "";
+        if (genre == null) genre = "";
+
+        return bookRepository.findByTitleLikeIgnoreCaseOrGenreLikeIgnoreCase(title, genre, pageable);
     }
 
 }
