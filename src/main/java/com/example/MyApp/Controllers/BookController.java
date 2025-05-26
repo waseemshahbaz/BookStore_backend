@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import static java.util.Objects.nonNull;
 
 import javax.swing.text.html.Option;
 import java.util.List;
@@ -83,7 +84,7 @@ public class BookController {
     public  Book saveBook(@RequestPart(required = false) Book book, @RequestPart(required = false) MultipartFile cover) {
         Book bookToBeSaved = new Book();
         bookToBeSaved.updateData(book);
-        if (!cover.isEmpty()) {
+        if (nonNull(cover) && !cover.isEmpty()) {
             String filename = amazonS3Client.uploadPicture(cover);
             if (!filename.isEmpty()) {
                 bookToBeSaved.setcoverImageURL(filename);
