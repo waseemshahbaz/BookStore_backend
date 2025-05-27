@@ -4,6 +4,8 @@ import com.example.MyApp.Entities.Book;
 import com.example.MyApp.Entities.Genre;
 import com.example.MyApp.Repositories.GenreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,6 +30,10 @@ public class GenreService {
 
     public List<Genre> listAllGenres() {
         return genreRepository.findAll();
+    }
+
+    public Page<Genre> listAllGenres(Pageable pageable) {
+        return genreRepository.findAll(pageable);
     }
 
 }
