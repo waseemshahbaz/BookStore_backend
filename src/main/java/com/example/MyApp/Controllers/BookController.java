@@ -89,6 +89,7 @@ public class BookController {
             if (!filename.isEmpty()) {
                 bookToBeSaved.setcoverImageURL(filename);
             }
+            bookToBeSaved.setSecondaryImageURL(book.getSecondaryImageURL());
         }
         return bookService.createBook(bookToBeSaved);
     }
@@ -104,6 +105,7 @@ public class BookController {
                if (!filename.isEmpty()) {
                    bookData.setcoverImageURL(filename);
                }
+               bookData.setSecondaryImageURL(book.getSecondaryImageURL());
            }
            Book returnObj = bookService.save(bookData);
            return returnObj;

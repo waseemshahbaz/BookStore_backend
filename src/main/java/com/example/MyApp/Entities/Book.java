@@ -21,8 +21,9 @@ public class Book {
     private String summary;
     private List<String> tags;
     private String coverImageURL;
+    private String secondaryImageURL;
 
-    public Book(String id, String title, String author, List<String> genre, int publicationYear, String isbn, double price, String language, String publisher, int numberOfPages, List<Double> ratings, String summary, List<String> tags, String coverImageURL) {
+    public Book(String id, String title, String author, List<String> genre, int publicationYear, String isbn, double price, String language, String publisher, int numberOfPages, List<Double> ratings, String summary, List<String> tags, String coverImageURL, String secondaryImageURL) {
         this.id = id;
         this.title = title;
         this.author = author;
@@ -37,6 +38,7 @@ public class Book {
         this.summary = summary;
         this.tags = tags;
         this.coverImageURL = coverImageURL;
+        this.secondaryImageURL = secondaryImageURL;
     }
 
     public void updateData(Book object) {
@@ -45,6 +47,7 @@ public class Book {
         this.setIsbn(object.getIsbn());
         this.setLanguage(object.getLanguage());
         this.setcoverImageURL(object.getcoverImageURL());
+        this.setSecondaryImageURL(object.secondaryImageURL);
         this.setNumberOfPages(object.getNumberOfPages());
         this.setPrice(object.getPrice());
         this.setPublicationYear(object.getPublicationYear());
@@ -173,4 +176,9 @@ public class Book {
     public void setcoverImageURL(String coverImageURL) {
         this.coverImageURL = coverImageURL;
     }
+
+    public String getSecondaryImageURL() { return secondaryImageURL; }
+
+    public void setSecondaryImageURL(String secondaryImageURL) { this.secondaryImageURL = secondaryImageURL; }
+
 }
