@@ -55,7 +55,7 @@ public class SecurityConfiguration {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowedOriginPatterns(List.of(
                 "https://c618-38-7-185-231.ngrok-free.app",
-                "https://your-app.vercel.app",
+                "https://productsmania.vercel.app",
                 "http://localhost:3000"
         ));
         config.setAllowedHeaders(List.of("*"));
